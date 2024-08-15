@@ -15,7 +15,9 @@ jobs:
   scan:
     name: Scan
     runs-on: ubuntu-latest
-    environment: uat
+    defaults:
+      run:
+        shell: pwsh
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -27,3 +29,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install checkov==${{ inputs.checkov_version }}
+      - name: PowershellCommand1
+        run: |
+          dir env: | Format-List
+      - name: PowershellCommand2
+        run: |
+          Write-Host "Publich Message is :"
+          Write-Host ${{ inputs.publicMessage }}
+          Write-Host "Secret Message is :"
+          Write-Host ${{ secrets.secretMessage }}
