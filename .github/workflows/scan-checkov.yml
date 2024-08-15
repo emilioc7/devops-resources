@@ -32,6 +32,9 @@ jobs:
   extraCommands:
     name: ExtraComando
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
     steps:
       - name: PowershellCommand1
         run: |
