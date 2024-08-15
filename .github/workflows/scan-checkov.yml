@@ -29,6 +29,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install checkov==${{ inputs.checkov_version }}
+  extraCommands:
+    name: ExtraComando
+    runs-on: ubuntu-latest
+    steps:
       - name: PowershellCommand1
         run: |
           dir env: | Format-List
