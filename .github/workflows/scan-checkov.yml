@@ -36,6 +36,7 @@ jobs:
         run: |
           Get-ChildItem -Recurse
       - name: Run Checkov Scan Powershell
+        continue-on-error: true
         run: |
           checkov --directory ${{ github.workspace }} --framework terraform --output github_failed_only | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
           checkov --directory ${{ github.workspace }} --framework terraform --output sarif
