@@ -20,7 +20,7 @@ jobs:
         shell: pwsh
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
@@ -36,7 +36,7 @@ jobs:
           Get-ChildItem -Recurse
       - name: Run Checkov Scan
         run: |
-          $Env:GITHUB_STEP_SUMMARY += checkov --directory ${{ github.workspace }} --framework terraform --output github_failed_only
+          $Env:GITHUB_STEP_SUMMARY = checkov --directory ${{ github.workspace }} --framework terraform --output github_failed_only
   extraCommands:
     name: ExtraComando
     runs-on: ubuntu-latest
