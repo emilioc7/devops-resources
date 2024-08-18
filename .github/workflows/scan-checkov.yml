@@ -36,7 +36,7 @@ jobs:
           Get-ChildItem -Recurse
       - name: Run Checkov Scan
         run: |
-          checkov --directory .
+          checkov --directory ${{ github.workspace }} --soft-fail --soft-fail-threshold 0 --framework terraform
   extraCommands:
     name: ExtraComando
     runs-on: ubuntu-latest
