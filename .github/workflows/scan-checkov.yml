@@ -38,6 +38,7 @@ jobs:
       - name: Run Checkov Scan Powershell
         run: |
           checkov --directory ${{ github.workspace }} --framework terraform --output github_failed_only | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          checkov --directory ${{ github.workspace }} --framework terraform --output sarif
   extraCommands:
     name: ExtraComando
     runs-on: ubuntu-latest
