@@ -29,6 +29,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install checkov==${{ inputs.checkov_version }}
+      - name: CodeCheckout
+        uses: actions/checkout@v3
+      - name: Run Checkov Scan
+        run: |
+          checkov
   extraCommands:
     name: ExtraComando
     runs-on: ubuntu-latest
