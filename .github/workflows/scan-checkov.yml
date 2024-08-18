@@ -15,6 +15,7 @@ jobs:
   scan:
     name: Scan
     runs-on: ubuntu-latest
+    continue-on-error: true
     defaults:
       run:
         shell: pwsh
@@ -35,16 +36,8 @@ jobs:
         run: |
           Get-ChildItem -Recurse
       - name: Run Checkov Scan Powershell
-        continue-on-error: true
         run: |
           checkov --directory ${{ github.workspace }} --framework terraform --output github_failed_only | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
-      - name: Print ENV Variable - GITHUB_STEP_SUMMARY
-        run: |
-          $Env:GITHUB_STEP_SUMMARY
-      # - name: Run Checkov Scan Bash
-      #   shell: bash
-      #   run: |
-      #     checkov --directory ${{ github.workspace }} --framework terraform --output github_failed_only >> $GITHUB_STEP_SUMMARY
   extraCommands:
     name: ExtraComando
     runs-on: ubuntu-latest
