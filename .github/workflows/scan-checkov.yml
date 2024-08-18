@@ -31,6 +31,9 @@ jobs:
           pip install checkov==${{ inputs.checkov_version }}
       - name: CodeCheckout
         uses: actions/checkout@v3
+      - name: List Directory Files
+        run: |
+          Get-ChildItem -Recurse
       - name: Run Checkov Scan
         run: |
           checkov
