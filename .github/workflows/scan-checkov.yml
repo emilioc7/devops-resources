@@ -55,6 +55,9 @@ jobs:
   retrieveCodeScanResults:
     name: GHCLICommand
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
     needs: scan
     steps: 
       - name: Retrieve latest scan and print to output
