@@ -40,6 +40,9 @@ jobs:
         run: |
           checkov --directory ${{ github.workspace }} --framework terraform --output github_failed_only | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
           checkov --directory ${{ github.workspace }} --framework terraform --output sarif
+      - name: PrintSarifResults
+        run: |
+          Get-Content -Path ./results.sarif
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
