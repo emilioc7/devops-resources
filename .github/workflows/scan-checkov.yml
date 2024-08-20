@@ -42,7 +42,7 @@ jobs:
           checkov --directory ${{ github.workspace }} --framework terraform --output sarif
       - name: PrintSarifResults
         run: |
-          Get-Content -Path ./results.sarif
+          Get-Content -Path ./results.sarif | jq
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v3
         with:
