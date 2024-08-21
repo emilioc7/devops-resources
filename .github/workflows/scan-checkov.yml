@@ -57,13 +57,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: scan
     steps: 
-      - name: Retrieve latest scan and print to output
+      - name: ScanReport-pwsh
         shell: pwsh
         run: |
             gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/emilioc7/checkov-example/code-scanning/analyses
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      - name: Retrieve latest scan and print to output
+      - name: ScanReport-bash
         shell: bash
         run: |
             gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/emilioc7/checkov-example/code-scanning/analyses
