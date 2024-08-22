@@ -74,13 +74,14 @@ jobs:
             $my_project = "EmilioCamachoProjects"
 
 
+            $env:AZURE_DEVOPS_EXT_PAT = '${{ secrets.ADOWORKITEMSTOKEN }}'
+
             az boards work-item show --id "416" --org $my_org
 
             
             
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AZURE_ACCESS_TOKEN: 4tua7iimgagn7zxk33gp3ykdcx7lmvln33teqhf3l2bgtkfslafq
           # CLICOLOR_FORCE: 1
       - name: ScanReport-bash
         shell: bash
