@@ -63,6 +63,7 @@ jobs:
         shell: pwsh
         continue-on-error: false
         run: |
+            dir env: | Format-List
             $ANALISIS_RESULTS = gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/emilioc7/checkov-example/code-scanning/analyses | ConvertFrom-Json
             # $ANALISIS_RESULTS | jq
             Write-Host "----- Latest Scan Result ID is $($ANALISIS_RESULTS[0].id) with date $($ANALISIS_RESULTS[0].created_at) - results_count[$($ANALISIS_RESULTS[0].results_count)], rules_count [$($ANALISIS_RESULTS[0].rules_count)] ----- `n"
