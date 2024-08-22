@@ -61,15 +61,25 @@ jobs:
     steps: 
       - name: ScanReport-pwsh
         shell: pwsh
-        continue-on-error: true
+        continue-on-error: false
         run: |
             $ANALISIS_RESULTS = gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/emilioc7/checkov-example/code-scanning/analyses | ConvertFrom-Json
             # $ANALISIS_RESULTS | jq
-            Write-Host "----- Latest Scan Result ID is $($ANALISIS_RESULTS[0].id) with date $($ANALISIS_RESULTS[0].created_at) - results_count[$($ANALISIS_RESULTS[0].results_count)], rules_count [$($ANALISIS_RESULTS[0].rules_count)] ----- \n"
+            Write-Host "----- Latest Scan Result ID is $($ANALISIS_RESULTS[0].id) with date $($ANALISIS_RESULTS[0].created_at) - results_count[$($ANALISIS_RESULTS[0].results_count)], rules_count [$($ANALISIS_RESULTS[0].rules_count)] ----- `n"
             $LATEST_RESULS_SARIF_FORMAT = gh api -H "Accept: application/sarif+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/emilioc7/checkov-example/code-scanning/analyses/$($ANALISIS_RESULTS[0].id)
-            $LATEST_RESULS_SARIF_FORMAT | jq
+            # $LATEST_RESULS_SARIF_FORMAT | jq
+
+            $my_org = "https://dev.azure.com/emc-apps"
+            $my_project = "EmilioCamachoProjects"
+
+
+            az boards work-item show --id "416" --org $my_org
+
+            
+            
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AZURE_DEVOPS_EXT_PAT: ${{ secrets.ADOWORKITEMSTOKEN }}
           # CLICOLOR_FORCE: 1
       - name: ScanReport-bash
         shell: bash
