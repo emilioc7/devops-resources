@@ -74,7 +74,7 @@ jobs:
             $my_project = "EmilioCamachoProjects"
 
 
-            az devops login --organization $my_org
+            # az devops login --organization $my_org
             az boards work-item show --id "416" --org $my_org
 
             
