@@ -10,7 +10,7 @@ on:
     secrets:
       secretMessage:
         required: true
-      GH_TOKEN:
+      ADOWORKITEMSTOKEN:
         required: true
 
 jobs:
