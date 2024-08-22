@@ -74,7 +74,7 @@ jobs:
             $my_project = "EmilioCamachoProjects"
 
 
-            # az devops login --organization $my_org
+            $Env:AZURE_DEVOPS_EXT_PAT | az devops login --organization $my_org  
             az boards work-item show --id "416" --org $my_org
 
             
