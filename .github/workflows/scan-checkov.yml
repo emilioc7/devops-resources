@@ -70,6 +70,7 @@ jobs:
             $LATEST_RESULS_SARIF_FORMAT | jq
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLICOLOR_FORCE: 1
       - name: ScanReport-bash
         shell: bash
         continue-on-error: true
