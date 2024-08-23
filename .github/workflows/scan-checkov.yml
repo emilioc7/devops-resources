@@ -90,13 +90,16 @@ jobs:
             set
             my_org="https://dev.azure.com/emc-apps"
             my_project="EmilioCamachoProjects"
-            echo "${{ secrets.ADOWORKITEMSTOKEN }}" | az devops login --organization "$my_org"
+            # echo "${{ secrets.ADOWORKITEMSTOKEN }}" | az devops login --organization "$my_org"
+
+            export AZURE_DEVOPS_EXT_PAT=${{ secrets.ADOWORKITEMSTOKEN }}
+            az devops project list
             
-            az boards work-item show --id "416" --org "$my_org"
+            # az boards work-item show --id "416" --org "$my_org"
             # gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/emilioc7/checkov-example/code-scanning/analyses
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AZURE_DEVOPS_EXT_PAT: ${{ secrets.ADOWORKITEMSTOKEN }}
+         
   extraCommands:
     name: ExtraComando
     runs-on: ubuntu-latest
