@@ -7,9 +7,6 @@ on:
       publicMessage:
         required: true
         type: string
-      super_token:
-        required: true
-        type: string
     secrets:
       secretMessage:
         required: true
