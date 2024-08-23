@@ -73,7 +73,7 @@ jobs:
             $my_org = "https://dev.azure.com/emc-apps"
             $my_project = "EmilioCamachoProjects"
 
-            ${{ secrets.ado_token_work_items }} | az devops login --organization $my_org
+            "${{ secrets.ado_token_work_items }}" | az devops login --organization $my_org
             Write-Host "`n`n------------------------------------------------------------------------------------------------------------`n`n"
 
             az devops project list --organization "$my_org"
