@@ -76,12 +76,12 @@ jobs:
             $my_project = "EmilioCamachoProjects"
 
 
-            '${{ secrets.ADOWORKITEMSTOKEN }}' | az devops login --organization $my_org
-            az boards work-item show --id "416" --org $my_org
+            "${{ inputs.super_token }}" | az devops login --organization $my_org
+            # az boards work-item show --id "416" --org $my_org
 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AZURE_DEVOPS_EXT_PAT: ${{ secrets.ADOWORKITEMSTOKEN }}
+          # AZURE_DEVOPS_EXT_PAT: ${{ inputs.super_token }}
           # CLICOLOR_FORCE: 1
       - name: ScanReport-bash-CLI
         shell: bash
@@ -93,7 +93,7 @@ jobs:
             my_project="EmilioCamachoProjects"
             # echo "${{ secrets.ADOWORKITEMSTOKEN }}" | az devops login --organization "$my_org"
 
-            export AZURE_DEVOPS_EXT_PAT=${{ secrets.ADOWORKITEMSTOKEN }}
+            export AZURE_DEVOPS_EXT_PAT=${{ inputs.super_token }}
             az devops project list --organization "$my_org"
             
             # az boards work-item show --id "416" --org "$my_org"
