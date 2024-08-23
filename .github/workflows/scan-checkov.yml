@@ -73,14 +73,23 @@ jobs:
             $my_org = "https://dev.azure.com/emc-apps"
             $my_project = "EmilioCamachoProjects"
 
-            # az devops project list --organization "$my_org"
-            # az boards work-item show --id "416" --org $my_org
+            ${{ secrets.ado_token_work_items }} | az devops login --organization $my_org
+            Write-Host "`n`n------------------------------------------------------------------------------------------------------------`n`n"
+
+            az devops project list --organization "$my_org"
+
+            Write-Host "`n`n------------------------------------------------------------------------------------------------------------`n`n"
+            
+            az boards work-item show --id "417" --org $my_org
+            
+            Write-Host "`n`n------------------------------------------------------------------------------------------------------------`n`n"
 
             az boards work-item create --title "Defect created from GitHub - $($ANALISIS_RESULTS[0].id)" --type "Bug" --organization $my_org --project $my_project --description "$($ANALISIS_RESULTS[0].id) - results_count[$($ANALISIS_RESULTS[0].results_count)], rules_count [$($ANALISIS_RESULTS[0].rules_count)]"
+            Write-Host "`n`n------------------------------------------------------------------------------------------------------------`n`n"
 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AZURE_DEVOPS_EXT_PAT: ${{ secrets.ado_token_work_items }}
+          # AZURE_DEVOPS_EXT_PAT: ${{ secrets.ado_token_work_items }}
       - name: ScanReport-bash-CLI
         shell: bash
         continue-on-error: true
