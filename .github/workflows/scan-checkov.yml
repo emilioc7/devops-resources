@@ -67,14 +67,16 @@ jobs:
             $ANALISIS_RESULTS = gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/emilioc7/checkov-example/code-scanning/analyses | ConvertFrom-Json
             # $ANALISIS_RESULTS | jq
             Write-Host "----- Latest Scan Result ID is $($ANALISIS_RESULTS[0].id) with date $($ANALISIS_RESULTS[0].created_at) - results_count[$($ANALISIS_RESULTS[0].results_count)], rules_count [$($ANALISIS_RESULTS[0].rules_count)] ----- `n"
-            $LATEST_RESULS_SARIF_FORMAT = gh api -H "Accept: application/sarif+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/emilioc7/checkov-example/code-scanning/analyses/$($ANALISIS_RESULTS[0].id)
-            $LATEST_RESULS_SARIF_FORMAT | jq
+            # $LATEST_RESULS_SARIF_FORMAT = gh api -H "Accept: application/sarif+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/emilioc7/checkov-example/code-scanning/analyses/$($ANALISIS_RESULTS[0].id)
+            # $LATEST_RESULS_SARIF_FORMAT | jq
 
             $my_org = "https://dev.azure.com/emc-apps"
             $my_project = "EmilioCamachoProjects"
 
-            az devops project list --organization "$my_org"
-            az boards work-item show --id "416" --org $my_org
+            # az devops project list --organization "$my_org"
+            # az boards work-item show --id "416" --org $my_org
+
+            az boards work-item create --title "Defect created from GitHub - $($ANALISIS_RESULTS[0].id)" --type "Bug" --organization $my_org --project $my_project --description "$($ANALISIS_RESULTS[0].id) - results_count[$($ANALISIS_RESULTS[0].results_count)], rules_count [$($ANALISIS_RESULTS[0].rules_count)]"
 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
