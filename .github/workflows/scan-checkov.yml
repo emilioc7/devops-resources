@@ -84,7 +84,7 @@ jobs:
             
             Write-Host "`n`n------------------------------------------------------------------------------------------------------------`n`n"
 
-            az boards work-item create --title "Defect created from GitHub - $($ANALISIS_RESULTS[0].id)" --type "Bug" --organization $my_org --project $my_project --description "$($ANALISIS_RESULTS[0].id) - results_count[$($ANALISIS_RESULTS[0].results_count)], rules_count [$($ANALISIS_RESULTS[0].rules_count)]"
+            az boards work-item create --title "Defect created from GitHub - $($ANALISIS_RESULTS[0].id)" --type "Bug" --organization $my_org --project $my_project --description "$($ANALISIS_RESULTS[0].id) - results_count[$($ANALISIS_RESULTS[0].results_count)], rules_count [$($ANALISIS_RESULTS[0].rules_count)]" --fields "Microsoft.VSTS.TCM.ReproSteps=<div>1- Open Application </div><div>2 - Login </div><div>3 - See error screen $($ANALISIS_RESULTS[0].created_at) </div>"
             Write-Host "`n`n------------------------------------------------------------------------------------------------------------`n`n"
 
         env:
